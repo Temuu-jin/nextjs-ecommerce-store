@@ -15,31 +15,43 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <header className={inter.className}>
         <nav>
-          <div style={{ alignItems: 'left' }}>
-            <Image src="/logo.png" alt="EcomStore" width={100} height={100} />
+          <div>
+            <a href="/" style={{ margin: 0 }}>
+              <Image
+                src="/yazulogo.png"
+                alt="EcomStore"
+                width={20}
+                height={20}
+              />
+            </a>
           </div>
           <div style={{ alignItems: 'center' }}>
-            <Link href="/">Home</Link>
-            <Link href="/products" data-test-id="products-link">
-              Products
-            </Link>
-            <Link href="/about" data-test-id="about-link">
-              About us
-            </Link>
-            <Link href="/contact" data-test-id="contact-link">
-              Contact
-            </Link>
+            <ul>
+              <li>
+                <Link href="/products" data-test-id="products-link">
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" data-test-id="about-link">
+                  About us
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" data-test-id="contact-link">
+                  Contact
+                </Link>
+              </li>
+            </ul>
           </div>
-          <div style={{ alignItems: 'right' }}>
-            <Link href="/login" data-test-id="login-link">
-              Login
-            </Link>
-            <Link href="/signup" data-test-id="signup-link">
-              Sign up
-            </Link>
-            <Link href="/cart" data-test-id="cart-link">
-              Cart
-            </Link>
+          <div>
+            <ul>
+              <li>
+                <Link href="/cart" data-test-id="cart-link">
+                  Cart<span data-test-id="cart-count"> sum</span>
+                </Link>
+              </li>
+            </ul>
           </div>
         </nav>
 
