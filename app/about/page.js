@@ -17,7 +17,7 @@ export default function About() {
               </p>
             </div>
           </div>
-          <div style={{ width: '5%' }} />
+          <div style={{ width: '10%' }} />
           <div className={styles.containerCardImg}>
             <img src="/plate1.jpg" alt="HeroImg" />
           </div>
@@ -28,7 +28,7 @@ export default function About() {
           <div className={styles.containerCardImg}>
             <img src="/plate2.jpg" alt="HeroImg" />
           </div>
-          <div style={{ width: '5%' }} />
+          <div style={{ width: '10%' }} />
           <div className={styles.containerCardInfo}>
             <div>
               <p>

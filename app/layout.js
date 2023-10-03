@@ -1,9 +1,8 @@
 import './globals.scss';
-import { Inter } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
-
-const inter = Inter({ subsets: ['latin'] });
+import { getCookie } from '../utils/cookies';
+import AcceptCookies from './AcceptCookies';
 
 export const metadata = {
   title: { default: 'Home page | EcomStore', template: '%s | EcomStore' },
@@ -11,9 +10,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const cartCookie = getCookie('cart');
+  const cart = cartCookie ? JSON.parse(cartCookie) : [];
+
   return (
     <html lang="en">
-      <header className={inter.className}>
+      <header>
+        <AcceptCookies />
         <nav>
           <div>
             <a href="/" style={{ margin: 0 }}>
@@ -48,7 +51,8 @@ export default function RootLayout({ children }) {
             <ul>
               <li>
                 <Link href="/cart" data-test-id="cart-link">
-                  Cart<span data-test-id="cart-count"> sum</span>
+                  Cart
+                  <span data-test-id="cart-count"> {cart.length}</span>
                 </Link>
               </li>
             </ul>

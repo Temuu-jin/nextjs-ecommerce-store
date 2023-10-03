@@ -1,11 +1,47 @@
+import { useEffect, useState } from 'react';
+import {
+  clearCartCookie,
+  getCartCookie,
+  setCartCookie,
+} from '../../utils/cookies';
 import styles from '../page.module.scss';
 
 export default function Cart() {
-  return (
-    <main className={styles.main}>
-      <h1>Cart</h1>
-    </main>
-  );
+  const CartPage = () => {
+    const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+      const cartFromCookie = JSON.parse(getCartCookie('cart'));
+      setCart(cartFromCookie || []);
+    }, []);
+
+    const addToCart = (product) => {
+      const updatedCart = [...cart, product];
+      setCart(updatedCart);
+      setCartCookie('cart', JSON.stringify(updatedCart), {
+        maxAge: 3600,
+        path: '/',
+      });
+    };
+
+    const clearCart = () => {
+      setCart([]);
+      clearCartCookie('cart');
+    };
+
+    return (
+      <div>
+        <h1>Shopping Cart</h1>
+        {cart.map((product) => (
+          <div key={product.id}>{product.name}</div>
+        ))}
+        <button onClick={() => addToCart({ id: 1, name: 'Product 1' })}>
+          Add to Cart
+        </button>
+        <button onClick={clearCart}>Clear Cart</button>
+      </div>
+    );
+  };
 }
 /* A Cart page (containing a list where products appear when you click on the "Add to cart" button on the single product page), which also shows the total price of all products
   - Each product needs to be contained in an element with the HTML attribute `data-test-id="cart-product-<product id>"`

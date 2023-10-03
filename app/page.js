@@ -13,7 +13,7 @@ export default function HomePage() {
           <div className={styles.containerCardImg}>
             <img src="/about.jpg" alt="HeroImg" />
           </div>
-          <div style={{ width: '5%' }} />
+          <div style={{ width: '10%' }} />
           <div className={styles.containerCardInfo}>
             <div>
               <p>

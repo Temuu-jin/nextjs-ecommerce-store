@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { getProducts } from '../../database/products.js';
 import styles from '../page.module.scss';
 
 /* A Products page (where all the products are listed)
@@ -16,44 +17,11 @@ image: img,
 price: number,
 id: number,
 quantity: number,
-size: string, (optional)
-color: string, (optional)
+type: string,
 }*/
 
 export default function Products() {
-  const product1 = {
-    name: 'Nigiri',
-    description: 'description1',
-    image: 'img',
-    price: 20,
-    id: 1,
-    quantity: 1,
-  };
-  const product2 = {
-    name: 'Hosomaki',
-    description: 'description2',
-    image: 'img',
-    price: 10,
-    id: 1,
-    quantity: 1,
-  };
-  const product3 = {
-    name: 'Uramaki',
-    description: 'description3',
-    image: 'img',
-    price: 15,
-    id: 1,
-    quantity: 1,
-  };
-  const product4 = {
-    name: 'Temaki',
-    description: 'description4',
-    image: 'img',
-    price: 90,
-    id: 1,
-    quantity: 1,
-  };
-  const products = [{ product1 }, { product2 }, { product3 }, { product4 }];
+  const products = getProducts();
 
   return (
     <main className={styles.main}>
@@ -62,17 +30,18 @@ export default function Products() {
       <ul className={styles.productGrid}>
         {products.map((product) => (
           <li key={`product-${product.id}`} className={styles.card}>
-            <Link href="/product" data-test-id="products-link">
+            <Link
+              href={`/products/${product.slug}`}
+              data-test-id="products-link"
+            >
               <Image
                 alt="Product"
-                src="/product.png"
-                width={300}
-                height={300}
+                src={product.image}
+                width={120}
+                height={100}
               />
-              <h2>Product</h2>
-              <p>Product Description</p>
+              <h2>{product.name}</h2>
             </Link>
-            <button>Add to Cart</button>
           </li>
         ))}
       </ul>
